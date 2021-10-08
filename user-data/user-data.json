@@ -1,0 +1,66 @@
+[
+    {
+        "Username": "ron133",
+        "Password": "43214321",
+        "AccountType": "Contributor",
+        "Review": {
+            "reviewUser": "ron133",
+            "reviewRating": "5/10", 
+            "reviewText": "Just okay? But it could have been better. It had many flaws",
+            "reviewBrief": "Not as bad as I thought."               
+        }
+    },
+    {
+        "Username": "harry01",
+        "Password": "12341234",
+        "AccountType": "Regular",
+        "Review": {
+            "reviewUser": "harry01",
+            "reviewRating": "1/10", 
+            "reviewText": "Worst movie ever.",
+            "reviewBrief": ":("            
+        }
+    },
+    {
+        "Username": "ross200",
+        "Password": "comp2406",
+        "AccountType": "Contributor"
+    },
+    {
+        "Username": "rachel",
+        "Password": "webdev1234",
+        "AccountType": "Regular"
+    },
+    {
+        "Username": "severusnape",
+        "Password": "00000000a",
+        "AccountType": "Contributor"
+    },
+    {
+        "Username": "moviejunkie",
+        "Password": "movieweb1",
+        "AccountType": "Regular"
+    },
+    {
+        "Username": "dumbledore",
+        "Password": "lollol",
+        "AccountType": "Regular",
+        "Review" : {
+            "reviewUser": "dumbledore",
+            "reviewRating": "9/10", 
+            "reviewText": "I want to watch this again",
+            "reviewBrief": "I think it's a nice movie."
+        }
+    },
+    {
+        "Username": "popeyes",
+        "Password": "somepassword",
+        "AccountType": "Contributor",
+        "Review": {
+            "reviewUser": "popeyes",
+            "reviewRating": "5/10", 
+            "reviewText": "I'll just write whatever here",
+            "reviewBrief": "Whatever....."            
+        }
+    }
+]

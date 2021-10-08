@@ -1,0 +1,40 @@
+html
+    head
+        style
+            include ../movie.css
+        meta(charset="utf-8")
+        title Movies
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main
+            h1 List of Movies
+
+            //- Show list of 10 Movies (and go to their page upon click)
+            ul.cont
+                each movie in movies
+                    a(href="/movies/"+movie.Id)
+                        li(style="list-style-type:none")
+                            .moviecontainer
+                                .leftmovie
+                                    img(src=movie.Poster style="width:30%;")
+                                .rightmovie
+                                    span #{movie.Title} (#{movie.Year})
+
+            //- pagination
+            p Pages:
+                if pagenum > 1
+                    - let url = "/movies?page=" + (pagenum-1)
+                    - if(qstring.length > 0)
+                        - url += "&" + qstring
+                    a(href=url) Previous
+                    | 
+                - url = "/movies?page=" + (pagenum+1)
+                - if(qstring.length > 0)
+                    - url += "&" + qstring
+                a(href=url) Next
+
+
+        include ../partial/footer

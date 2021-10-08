@@ -1,0 +1,158 @@
+html
+    head
+        style
+            include ../movie.css
+        title #{film.Title} (#{film.Year})
+        script(src='/javascript/client.js') 
+
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main
+            .movierow
+                //- Left Column
+                .movieleft
+                    //- Poster
+                    br
+                    img(src=film.Poster style="max-width:80%; max-height:80%")
+                    br
+                    br
+                    //- Add to Watched List Button (goes to Profile page)
+                    - if (alreadywatched ==="watched")
+                        button(id="watchlistadd" onclick="doWatched(this.value)" name="RemoveW" value=`${film.Id}`) Remove from Watched List
+                    - if (alreadywatched ==="unwatched" && disable!="disabled")
+                        button(id="watchlistadd" onclick="doWatched(this.value)" name="AddW" value=`${film.Id}`) Add to Watched List
+                    - if (alreadywatched ==="unwatched" && disable==="disabled")
+                        button(id="watchlistadd" onclick="doWatched(this.value)" name="AddW" value=`${film.Id}` disabled) Add to Watched List
+                    br
+                    br
+                    //- Similar Movies (Movies with same Genre). Show up to 8 movies
+                    h3 Similar Movies
+                    ul.simMovies
+                        - let counter=0
+                        each movie in movies
+                            - if (movie!=film && movie.Genre.includes(film.Genre[0]))
+                                li
+                                    a(href="/movies/"+movie.Id).link #{movie.Title} (#{movie.Year})
+                                - counter+=1
+                                - if (counter>7)
+                                    - break;
+                //- Right column
+                .movieright
+                    //- Title (Year)
+                    h1 #{film.Title} (#{film.Year})
+                    hr
+                    //- Runtime, Average Rating
+                    - if (isNaN(film.Rating))
+                        - film.Rating = "N/A"
+                    table(style="margin-left:auto; margin-right:auto")
+                        tr
+                            td Running Time: #{film.Runtime}utes 
+                            td Average Rating: #{film.Rating}
+                    hr
+                    //- Released Time:
+                    h3 Released: 
+                    | #{film.Released}
+                    hr
+                    //- Plot
+                    h3 Plot
+                    p #{film.Plot}
+                    hr
+                    //- Genres (go to search result page)
+                    h3 Genres
+                    each genre in film.Genre
+                        a(href="/movies?title=&genre=" +genre+ "&actor=&director=&writer=&year=").link #{genre}
+                        | 
+                    hr
+                    //- Directors List (Go to each person page)
+                    h2 Directors
+                    each director in film.Director
+                        - let someId = Object.keys(people).find(id => {return people[id].Name === director});
+                        a(href="/people/"+someId).link #{director}
+                        br
+                    hr
+                    //- Actors List (Go to each person page)
+                    h2 Actors
+                    each actor in film.Actors
+                        - let someId = Object.keys(people).find(id => {return people[id].Name === actor});
+                        a(href="/people/"+someId).link #{actor}
+                        br
+                    hr
+                    //- Actors List (Go to each person page)
+                    h2 Writers
+                    each writer in film.Writer
+                        - let someId = Object.keys(people).find(id => {return people[id].Name === writer});
+                        a(href="/people/"+someId).link #{writer}
+                        br
+                    hr
+                    //- Show Reviews
+                    h2 Reviews
+                    - let reviewCounter = 0
+                    each r in film.Review
+                        - let review = reviews[r]
+                        .userreview
+                            //- Reviewer Username
+                            span.reviewer Reviewer: #[a(href="/users/"+review.reviewUser).link #{review.reviewUser}]
+                            br
+                            //- Reviewer's Rating
+                            span.rating Rating: #{review.reviewRating}/10 for #{film.Title}
+
+                            //- Display Brief Summary (up to 40 characters)
+                            - let brief = review.reviewBrief
+                            - if (brief.length > 40)
+                                - brief = brief.substring(0,40)+ "..."
+                            p.text #{brief}
+
+                            //- Go to Review Page for details
+                            - if (review.reviewText.length>0)
+                                a(href="/reviews/"+review.reviewId).link view details
+                            | 
+                            - if (review.reviewUser===username)
+                                button(id="delete" onclick="deletereview(this.value)" name="Delete" value=`${review.reviewId}`) Delete
+                            - reviewCounter++
+                        - if (reviewCounter>3)
+                            br
+                            a(href="/reviews?movie="+film.Id style="border:outset; border-color:grey").link More Reviews...
+                            - break;
+                        br
+
+                    //- Write Review
+                    h3 Add Your Review
+                    form(action="/reviews" method="POST").addreview
+                        //- Rate (number 1-10)
+                        |
+                        label(for="").addreview Rating (1-10): 
+                        input(type="number" min="1" max="10" style="width:50px" name="rating" id="rating")
+                        | 
+                        //- Submit Basic Review (Goes to Review Page)
+                        button(type="submit" name="brb" value=`${film.Id}` id="brb" onclick="basicreview()").addreview Submit Basic Review
+                        br
+                        |
+                        //- Write Brief Summary:
+                        label(for="").addreview Basic summary: 
+                        br
+                        input(
+                            type="text"
+                            value=""
+                            style="width:100%"
+                            placeholder="write a summary of your review here..."
+                            name="brief"
+                            id="brief"
+                        )
+                        br
+                        | 
+                        //- Full Review: 
+                        label(for="").addreview Full Review:
+                        br
+                        textarea(
+                            id="full"
+                            style="width:100%" placeholder="write your review here..."
+                            name="full"
+                        )
+                        br
+                        |
+                        //- Submit Full Review (Goes to Review Page)
+                        button(type="submit" name="frb" id="frb" value=`${film.Id}` onclick="reviewcheck()").addreview Submit Full Review
+        include ../partial/footer

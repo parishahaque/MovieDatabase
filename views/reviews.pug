@@ -1,0 +1,50 @@
+html
+    head
+        style
+            include ../movie.css
+        meta(charset="utf-8")
+        script(src='/javascript/client.js') 
+        title Reviews
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main
+            //- Show list of 10 Reviews (and go to their page upon click)
+            each review in reviews
+                .userreview
+                    //- Reviewer Username
+                    span.reviewer Reviewer: #[a(href="/users/"+review.reviewUser).link #{review.reviewUser}]
+                    br
+                    //- Reviewer's Rating
+                    span.rating Rating: #{review.reviewRating} for #[a(href="/movies/"+movies[review.reviewMovie].Id).link #{movies[review.reviewMovie].Title}]
+
+                    //- Display Brief Summary (up to 40 characters)
+                    - let brief = review.reviewBrief
+                    - if (brief.length > 40)
+                        - brief = brief.substring(0,40)+ "..."
+                    p.text #{brief}
+
+                    //- Go to Review Page for details
+                    - if (review.reviewText.length>0)
+                        a(href="/reviews/"+review.reviewId).link view details
+                    | 
+                    - if (review.reviewUser===username)
+                        button(id="delete" onclick="deletereview(this.value)" name="Delete" value=`${review.reviewId}`) Delete
+                br
+
+            //- pagination
+            p Pages:
+                if pagenum > 1
+                    - let url = "/reviews?page=" + (pagenum-1)
+                    - if(qstring.length > 0)
+                        - url += "&" + qstring
+                    a(href=url) Previous
+                    | 
+                - url = "/reviews?page=" + (pagenum+1)
+                - if(qstring.length > 0)
+                    - url += "&" + qstring
+                a(href=url) Next
+
+        include ../partial/footer

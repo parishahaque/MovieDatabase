@@ -1,0 +1,31 @@
+html
+    head
+        style
+            include ../movie.css
+        title Your Movies
+        meta(charset="utf-8")
+        script(src='/javascript/client.js') 
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main.notif
+            //-header
+            h1 Your Movies
+            table
+                each id in user.WatchedMovies
+                    tr
+                        td #[a(href="/movies/"+id).link #{movies[id].Title} (#{movies[id].Year})]
+                        | 
+                        //- Remove from watch list button (only show if viewing own profile)
+                        - if (loggedin)
+                            td #[button(id="remove_movie" onclick="removemovie(this.value)" name="Remove" value=`${movies[id].Id}`) Remove]
+            br
+            br
+            //-Profile Page Link
+            a(href="/profile").link Go Back to Profile
+
+        include ../partial/footer
+
+

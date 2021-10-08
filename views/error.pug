@@ -1,0 +1,18 @@
+html
+    head
+        style
+            include ../movie.css
+        title #{errorcode} Error
+        meta(charset="utf-8")
+        script(src='/javascript/client.js') 
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main.notif
+            h1 #{errorcode}
+            span #{errormessage}
+        include ../partial/footer
+
+

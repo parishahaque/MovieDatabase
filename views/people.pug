@@ -1,0 +1,34 @@
+html
+    head
+        meta(charset="utf-8")
+        style
+            include ../movie.css
+        title People
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main
+            h1 List of People
+            //- Show list of 10 Persons (and go to their page upon click)
+            - let counter = 0
+            ul.movies
+                each person in people
+                    li
+                        a(href="/people/"+person.Id).link #{person.Name}
+
+
+            //- Pagination
+            p Pages:
+                if pagenum > 1
+                    - let url = "/people?page=" + (pagenum-1)
+                    - if(qstring.length > 0)
+                        - url += "&" + qstring
+                    a(href=url) Previous
+                    | 
+                - url = "/people?page=" + (pagenum+1)
+                - if(qstring.length > 0)
+                    - url += "&" + qstring
+                a(href=url) Next
+        include ../partial/footer

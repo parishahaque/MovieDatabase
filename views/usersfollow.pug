@@ -1,0 +1,29 @@
+html
+    head
+        style
+            include ../movie.css
+        title Users You Follow
+        meta(charset="utf-8")
+        script(src='/javascript/client.js') 
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main.notif
+            //-header
+            h1 Users You Follow
+            table
+                each followingId in user.FollowingUsers
+                    tr
+                        td #[a(href="/users/"+followingId).link #{users[followingId].Username}]
+                        | 
+                        //- Follow/Unfollow Button
+                        - if (loggedin)
+                            td #[button(id="follow_button" onclick="unfollowUser(this.value)" name="Unfollow" value=`${users[followingId].Username}`) Unfollow]
+            br
+            br
+            //-Profile Page Link
+            a(href="/profile").link Go Back to Profile
+
+        include ../partial/footer

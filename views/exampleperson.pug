@@ -1,0 +1,73 @@
+html
+    head
+        meta(charset="utf-8")
+        style
+            include ../movie.css
+        title #{person.Name}
+        script(src='/javascript/client.js') 
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+
+        div#main.person
+            //-Header Container
+            .header
+                //-Person Name
+                h1 #{person.Name}
+                | 
+                //-Follow Button
+                - if (disable!="disabled")
+                    button(id="follow_button" onclick="follow()" name=`${folbutton}` value=`${person.Id}`) #{folbutton}
+            hr
+
+            h2 Filmography
+
+            //- As Writer (Show Movie titles and Links to Movie Pages)
+            - if (person.hasOwnProperty("WroteMovie"))
+                .personalign
+                    h3 Writer:
+                    - for (let i=0; i<person.WroteMovie.length; i++)
+                        a(href="/movies/"+person.WroteMovie[i]).link #{movies[person.WroteMovie[i]].Title}
+                        br
+                    br
+                hr
+            //-As Director
+            - if (person.hasOwnProperty("DirectedMovie"))
+                .personalign
+                    h3 Director:
+                    - for (let i=0; i<person.DirectedMovie.length; i++)
+                        a(href="/movies/"+person.DirectedMovie[i]).link #{movies[person.DirectedMovie[i]].Title}
+                        br
+                    br
+                hr
+            //- As Actor
+            - if (person.hasOwnProperty("ActedMovie"))
+                .personalign
+                    h3 Actor:
+                    - for (let i=0; i<person.ActedMovie.length; i++)
+                        a(href="/movies/"+person.ActedMovie[i]).link #{movies[person.ActedMovie[i]].Title}
+                        br
+                    br
+                hr
+
+            //-Frequent Collaborations
+            .personalign
+                h2 Frequent Collaborators:
+                - let n =0
+                //- Find the highest number of collaborations with another person.
+                //- And for each number, show each person with that number of collaborations. Decrement each number.
+                //- Don't show more than 5 people
+                - let bignum = Math.max(...Object.keys(frequent))
+                - for (let i=bignum; i>0; i--)
+                    - if (i in frequent)
+                        - for (let j=0; j < frequent[i].length; j++)
+                            a(href="/people/"+frequent[i][j].Id).link #{frequent[i][j].Name}
+                            br
+                            - n+=1
+                            - if (n>4)
+                                - break
+                br
+            hr           
+        include ../partial/footer

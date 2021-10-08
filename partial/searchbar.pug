@@ -1,0 +1,24 @@
+
+div#search
+    br
+    //- Search bar
+    form(action="/search" method="POST")
+ 
+        //- Search by Title, Genre Person
+        select(id="selectv" name="selectv").form-control
+            option(value="title" id="bytitle" name="bytitle") Title
+            option(value="genre" id="bygenre" name="bygenre") Genre
+            option(value="person" id="byperson" name="byperson") Person
+        | 
+        //- Text bar
+        input(
+            type="text"
+            value=""
+            style="width:300px"
+            autofocus
+            id="dosearchbar"
+            name="dosearchbar"
+        )
+        |  
+        //- Search button *Go to default search result page
+        button( type="submit" id="search_button") Search

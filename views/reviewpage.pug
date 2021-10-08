@@ -1,0 +1,35 @@
+html
+    head
+        style
+            include ../movie.css
+        title Review for #{film.Title}
+        meta(charset="utf-8") 
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main
+            h1 Review for #[a(href="/movies/"+film.Id).link #{film.Title}]
+            .reviewpage
+                //- Reviewer Username
+                label(for="") #[strong Written by] 
+                span #[a(href="/users/"+review.reviewUser).link #{review.reviewUser}]
+                br
+                br
+                //- Rating
+                label(for="") #[strong Rating]: 
+                span #{review.reviewRating}
+                br
+                //- Brief Review:
+                label(for="") #[strong Brief Summary]: 
+                span #{review.reviewBrief}
+                br
+                br
+                //- Full Review
+                label(for="") #[strong Full Review]: 
+                br 
+                p #{review.reviewText}
+        include ../partial/footer
+
+

@@ -1,0 +1,32 @@
+html
+    head
+        style
+            include ../movie.css
+        title Register
+        script(src='/javascript/client.js') 
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main
+
+            //-Sign Up
+            h1 REGISTER 
+             //- box containing the items
+            .login
+                form(action="/signup" method="POST")
+                    table
+                        tr
+                            td #[label(for="") Username:]
+                            //- username textbar
+                            td #[input(type="text" id="username" name="username" value="" autofocus required)]
+                        tr
+                            //- password textbar  
+                            |
+                            td #[label(for="") Password:]
+                            td #[input(type="password" id="password" name="password" value="" autofocus required)]
+                    |
+                     
+                    //- sign up button (Go to Profile page)
+                    button(type="submit" id="signup_button") Sign Up

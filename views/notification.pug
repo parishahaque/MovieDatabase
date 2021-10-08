@@ -1,0 +1,32 @@
+html
+    head
+        style
+            include ../movie.css
+        title Notifications
+        meta(charset="utf-8")
+        script(src='/javascript/client.js') 
+
+
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main.notif
+            //-header
+            h1 Notifications
+
+            //-notification and delete button
+            table
+                each notification in user.Notifications
+                    tr
+                        td #{notification} 
+                        td #[button(id="delete" onclick="deletenotif(this.value)" name="Delete" value=`${notification}`) Delete]
+            br
+            br
+            //-Profile Page Link
+            a(href="/profile").link Go Back to Profile
+
+        include ../partial/footer
+
+

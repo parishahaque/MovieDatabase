@@ -1,0 +1,33 @@
+html
+    head
+        style
+            include ../movie.css
+        title People Your Follow
+        meta(charset="utf-8")
+        script(src='/javascript/client.js') 
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main.notif
+            //-header
+            h1 People You Follow
+            table
+                each personId in user.FollowingPeople
+                    tr
+                        td #[a(href="/people/"+personId).link #{people[personId].Name}]
+                        | 
+                        //- Follow/Unfollow Button'
+                        - if (loggedin)
+                            td #[button(id="follow_button" onclick="unfollowPerson(this.value)" name="Unfollow" value=`${people[personId].Id}`) Unfollow]
+            br
+            br
+            //-Profile Page Link
+            a(href="/profile").link Go Back to Profile
+
+        include ../partial/footer
+
+
+
+

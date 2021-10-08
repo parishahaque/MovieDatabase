@@ -1,0 +1,19 @@
+div#header
+    //- Navigation bar: Go to each page by clicking item (home page, profile page, sign in page, advanced search page, contribute page)
+    a(href="/" || "/index").menu Home
+    |
+    |
+    a(href="/profile").menu Profile
+    |
+    |
+    a(href="/search").menu Advanced Search
+    |
+    |
+    a(href="/contribute").menu Add Person/Movie
+    | 
+    | 
+    a(href="/signin").menu Sign-In/Sign-Up
+    |
+    |
+    form(action="/signout" method="post").menu
+        button(type="submit").menu Sign Out

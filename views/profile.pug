@@ -1,0 +1,148 @@
+html
+    head
+        style
+            include ../movie.css
+        title Your Profile
+        script(src='/javascript/client.js') 
+    body(onload="refresh()")
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main
+            //- Own Username and Account Tpe
+            .header
+                h1 #{user.Username}
+                span #{user.AccountType}
+
+            .row
+                .left
+                    //- Change Account Type (Radio input)
+                    h3 Account Type
+                    form(method="post" action="/users/"+user.Username)
+                        .leftAlign
+                            input(
+                                type="radio"
+                                value="1"
+                                name="account_type"
+                                checked
+                            )
+                            | Regular
+                            br
+                            input(
+                                type="radio"
+                                value="2"
+                                name="account_type"
+                            )
+                            | Contributing
+                        br
+                        //- Change Account Type Button
+                        input(type="submit" id = "profiletype" name="profiletype" value="Save")
+
+                    //- People you follow (x display more than 11). Go to each person page by clicking. Follow/unfollow button
+                    h2 People Following
+                    - let counter = 0
+                    table
+                        each personId in user.FollowingPeople
+                            tr
+                                td #[a(href="/people/"+personId).link #{people[personId].Name}]
+                                | 
+                                //- Follow/Unfollow Button
+                                td #[button(id="follow_button" onclick="unfollowPerson(this.value)" name="Unfollow" value=`${people[personId].Id}`) Unfollow]
+                                - counter +=1
+                            - if (counter > 5)
+                                //- individual people following page
+                                td #[a(href="/users/"+user.Username+"/peoplefollow" style="border:outset; border-color:AntiqueWhite; font-size: 80%; padding:4px;").link All people you follow]
+                                - break;
+                    //- Users you follow (x display more than 9). Go to each user page by clicking
+                    h2 Users Following
+                    - let userCount = 0
+                    table
+                        each followingId in user.FollowingUsers
+                            tr
+                                td #[a(href="/users/"+followingId).link #{users[followingId].Username}]
+                                | 
+                                //- Follow/Unfollow Button
+                                td #[button(id="follow_button" onclick="unfollowUser(this.value)" name="Unfollow" value=`${users[followingId].Username}`) Unfollow]
+                            - userCount +=1
+                            - if (userCount > 3)
+                                //- individual users following page
+                                td #[a(href="/users/"+user.Username+"/usersfollow" style="border:outset; border-color:AntiqueWhite; font-size: 80%; padding:4px;").link All users you follow]
+                                - break;
+                    
+                    //- Movies you watched (x display more than 11). Go to each movie page by clicking. Remove watch list button too
+                    h2 Movies You Watched
+                    - let counter1 = 0
+                        table
+                            each id in user.WatchedMovies
+                                tr
+                                    td #[a(href="/movies/"+id).link #{movies[id].Title} (#{movies[id].Year})]
+                                    | 
+                                    //- Remove from watch list (button)
+                                    td #[button(id="remove_movie" onclick="removemovie(this.value)" name="Remove" value=`${movies[id].Id}`) Remove]
+                                - counter1 +=1
+                                - if (counter1 > 6)
+                                    //-individual watchlist page
+                                    td #[a(href="/users/"+user.Username+"/watchlist" style="border:outset; border-color:AntiqueWhite; font-size: 80%; padding:4px;").link Go to Watchlist]
+                                    - break;
+                    //- Review
+                    h2 Your Reviews
+                    - let reviewCounter = 0
+                    each review in user.Review 
+                        .userreview
+                            //- You
+                            span.reviewer Reviewer: #[a(href="/profile").link #{reviews[review].reviewUser}]
+                            br
+                            //- Rating
+                            span.rating Rating #{reviews[review].reviewRating} for #[a(href="/movies/"+movies[reviews[review].reviewMovie].Id).link #{movies[reviews[review].reviewMovie].Title}]
+                            //- Show Brief Review
+                            - let brief = reviews[review].reviewBrief
+                            p.text #{brief}
+                            //- Go to review page
+                            - if (reviews[review].reviewText.length>0)
+                                a(href="/reviews/"+reviews[review].reviewId).link view details
+                            | 
+                            //- Delete Review
+                            button(id="delete" onclick="deletereview(this.value)" name="Delete" value=`${review}`) Delete
+                            - reviewCounter++
+                        - if (reviewCounter>3)
+                            br
+                            br
+                            a(href="/reviews?reviewer="+user.Username style="border:outset; border-color:AntiqueWhite; font-size: 80%; padding:2px;").link More Reviews...
+                            - break;
+                        br
+
+                    //- Recommended movies (Same Genre). Display up to 4
+                    h2 Recommendations...
+                    .leftAlign
+                        - if (user.WatchedMovies.length > 0)
+                            - let counter=0
+                            each movie in movies
+                                - if (movie!=film && movie.Genre.includes(movies[user.WatchedMovies[0]].Genre[0]))
+                                    li
+                                        a(href="/movies/"+movie.Id).link #{movie.Title} (#{movie.Year})
+                                    - counter+=1
+                                    - if (counter>4)
+                                        - break;
+                //- Notifications ( right column)
+                .right
+                    h3 Notifications
+                    - let countnotif = 0
+                    table
+                        each notification in user.Notifications
+                            //- Don't display more than 25 characters
+                            - let notif = notification
+                            - if (notification.length>25)
+                                - notification = notification.substring(0,25)+ "..."
+                            tr 
+                                //- Notification text
+                                td #{notification} 
+                                //- View Button (Goes to Notification Page)
+                                td #[a(href="/users/"+user.Username+"/notification") #[button(id="view_notif") View]]
+                                //- Delete Notification Button
+                                td #[button(id="delete" onclick="deletenotif(this.value)" name="Delete" value=`${notif}`) Delete]
+                            - countnotif++
+                                - if (countnotif>9)
+                                    a(href="/users/"+user.Username+"/notification" style="font-size:80%").link click to see more
+                                    - break
+        include ../partial/footer

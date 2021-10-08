@@ -1,0 +1,70 @@
+html
+    head
+        style
+            include ../movie.css
+        title User
+        script(src='/javascript/client.js') 
+    body
+        div#header
+            include ../partial/header
+        div#search
+            include ../partial/searchbar
+        div#main
+            //- Username and Follow Button
+            .header
+                h1 #{user.Username}
+                | 
+                //- follow button
+                - if (disable!="disabled")
+                    button(id="follow_button" onclick="followUser()" name=`${folbutton}` value=`${user.Username}`) #{folbutton}
+            .row
+                //- Left Column
+                .left
+                    //- People that the user follows (x show more than 11)
+                    h2 People Following
+                    - let counter = 0
+                    table
+                        each personId in user.FollowingPeople
+                            tr
+                                td #[a(href="/people/"+personId).link #{people[personId].Name}]
+                                - counter +=1
+                            - if (counter > 5)
+                                //- individual people following page
+                                td #[a(href="/users/"+user.Username+"/peoplefollow" style="border:outset; border-color:AntiqueWhite; font-size: 80%; padding:2px;").link All people you follow]
+                                - break;
+                    //- Movies that the user watched (x show more than 11)
+                    h2 Movies the User Watched
+                    - let counter1 = 0
+                        table
+                            each id in user.WatchedMovies
+                                tr
+                                    td #[a(href="/movies/"+id).link #{movies[id].Title}]
+                                    | 
+                                - counter1 +=1
+                                - if (counter1 > 6)
+                                    //-individual watchlist page
+                                    td #[a(href="/users/"+user.Username+"/watchlist" style="border:outset; border-color:AntiqueWhite; font-size: 80%; padding:2px;").link Go to Watchlist]
+                                    - break;
+                    //- User's Reviews (Reviewer name, Rating, Brief Review, Go to Review Page)
+                    h2 Reviews
+                    - let reviewCounter = 0
+                    each review in user.Review 
+                        .userreview
+                            span.reviewer Reviewer: #[a(href="/users/"+user.Username).link #{user.Username}]
+                            br
+                            span.rating Rating: #{reviews[review].reviewRating}
+                            - let brief = reviews[review].reviewBrief
+                            p.text #{brief}
+                            a(href="/reviews/"+reviews[review].reviewId).link view details
+                        - reviewCounter++
+                        - if (reviewCounter>3)
+                            br
+                            br
+                            a(href="/reviews?reviewer="+user.Username style="border:outset; border-color:AntiqueWhite; font-size: 80%; padding:2px;").link More Reviews...
+                            - break;
+                        br
+
+                .right
+                    //- contributing / regular
+                    h3 #{user.AccountType} Account
+        include ../partial/footer

@@ -1,0 +1,652 @@
+
+
+
+/* the middle part of the page */
+div#main {
+    text-align: center;
+    color: #544D46;
+    font-family: Courier;
+    min-height: 80%;
+    padding: 10px;
+}
+
+/* the navigation bar with menus */
+div#header {
+    background-color: #544D46;
+    /* overflow: hidden; */
+    font-size: 20px;
+    padding: 3px 3px 0px 9px;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-top: -8px;
+    font-family: Courier;
+    /* align-items: stretch; */
+    top: 0;
+    width: 101%;
+
+}
+
+/* each menu item (home, profile,...) */
+a.menu {
+    text-decoration: none;
+    padding: 20px;
+    display: inline-block;
+    margin: -4px;
+    color: white;
+    transition: 0.3s;
+
+}
+
+/* change colour when hovering over the menu item */
+a.menu:hover {
+    background-color: white;
+    color: #544D46;
+}
+
+form.menu {
+    text-decoration: none;
+    padding: 20px;
+    display: inline-block;
+    margin: -4px;
+    color: white;
+}
+
+
+button.menu{
+    color: white;
+    background-color: #544D46;
+    font-family: Courier;
+
+    transition: 0.3s;
+}
+
+/* footer with copyright */
+div#footer {
+    text-align: center;
+    font-family: Courier;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-bottom: -8px;
+    background-color: #544D46;
+    color: white;
+    height: 4rem;
+    width: 101%;
+    padding: 10px;
+    bottom: 0;
+    position: relative;
+}
+
+/* Search bar */
+div#search {
+    text-align:center;
+}
+
+
+
+
+/* Sign-up/Sign-in Page */
+
+
+
+/* log-in box */
+.login {
+    text-align: left;
+    display: inline-block;
+    padding: 20px;
+    border-style: dotted;
+}
+
+
+/* ensures alignment of login page items */
+.login label {
+    width: 100px;
+    display: inline-block;
+    margin: 5px;
+}
+
+/* positions of sign-in / sign-up buttons */
+
+#signup_button {
+    float: right;
+    margin-top: 5px;
+    background-color:rgb(206, 150, 191);
+    color:black;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.3;
+    text-align: center;
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+#signup_button:hover {
+    background-color:rgb(111, 0, 81);
+    color: white;
+}
+
+#signin_button {
+    float: right;
+    margin-top: 5px;
+    background-color:rgb(206, 150, 191);
+    color:black;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.3;
+    text-align: center;
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+#signin_button:hover {
+    background-color:rgb(111, 0, 81);
+    color: white;
+}
+
+#create_acc_button {
+    background-color:rgb(255, 234, 249);
+    color:rgb(61, 62, 67);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: 0.3s;
+
+}
+
+#create_acc_button:hover {
+    background-color:rgb(136, 85, 9);
+    color: white;
+}
+
+
+
+
+/* Contribute Page */
+
+
+
+
+
+/* Contribute (Add Movie/Person) page boxes */
+.addPerson, .addMovie {
+    border-style: dotted;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 15px;
+    border-radius: 14px;
+    display: inline-block;
+    padding:14px;
+}
+
+/* specificiations for addMovie box */
+.specification {
+    display: inline-block;
+    text-align: left;
+}
+
+/* Align the contribute box contents */
+.addcontainer {
+    text-align: left;
+    display: inline-block;
+}
+
+/* align the contents */
+.addcontainer label {
+    width: 150px;   
+    display: inline-block; 
+    margin: 5px;
+}
+
+/* align button */
+.addcontainer button {
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: right;
+    background-color: orange;
+    color:rgb(61, 62, 67);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+
+.addcontainer button:hover {
+    background-color: rgb(135, 88, 0);
+    color:rgb(230, 234, 255);
+
+}
+
+
+
+
+/* Profile/User */
+
+
+
+
+/* Profile/User page Alignment */
+
+.left {
+    float: left;
+    width: 65%;
+    margin-left: 5%;
+}
+
+.left table {
+    display: inline-block;
+    text-align: left;
+}
+
+.leftAlign {
+    display: inline-block;
+    text-align: left;
+}
+
+.userreview {
+    width: 80%;
+    display: inline-block;
+    border-style:solid;
+    border-color:rgb(127, 128, 121);
+    padding: 10px;
+    text-align: left;
+}
+
+
+.right {
+    float: right;
+    width: 25%;
+    margin-right: 5%;
+}
+
+.right table {
+    font-size: smaller;
+    color: rgb(61, 62, 67);
+}
+  
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* follow users/people button */
+#follow_button {
+    background-color:rgb(132, 98, 255);
+    color:rgb(233, 236, 248);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+#follow_button:hover {
+    background-color:rgb(95, 51, 255);
+    color:rgb(233, 236, 248);
+
+}
+
+/* remove movie from watch list button */
+#remove_movie {
+    background-color:rgb(255, 206, 240);
+    color:rgb(61, 62, 67);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+#remove_movie:hover {
+    background-color:rgb(135, 105, 126);
+    color:white;
+
+}
+
+
+
+/* save button for account type radio items */
+#profiletype {
+    background-color:rgb(227, 250, 162);
+    color:rgb(61, 62, 67);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+#profiletype:hover {
+    background-color:rgb(113, 120, 88);
+    color:rgb(233, 236, 248);
+}
+
+/* view notification button */
+
+#view_notif{
+    background-color:rgb(212, 246, 255);
+    color:rgb(61, 62, 67);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: 0.3s; 
+}
+#view_notif:hover {
+    background-color:rgb(103, 106, 92);
+    color:rgb(233, 236, 248);
+}
+
+
+
+/* Profile/User Page: User Heading */
+
+/* username */
+.header h1 {
+    display: inline-block;
+}
+
+/* contributing or regular */
+.header span {
+    margin-left:10px;
+    border-style:inset;
+    font-size:12px;
+    padding: 5px 12px;
+}
+
+.header input.follow {
+    margin-left:10px;
+    border-style:inset;
+}
+
+
+
+/* Notification Page */
+
+div#main.notif table {
+    display: inline-block;
+}
+
+#delete {
+    background-color:rgb(255, 197, 170);
+    color:rgb(61, 62, 67);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+#delete:hover {
+    background-color:rgb(255, 145, 94);
+
+}
+
+
+
+
+/* Advanced search page align */
+
+.searchpage {
+    text-align: left;
+    display: inline-block;
+    background-color: lightcyan;
+    padding:14px;
+    border-radius: 14px;
+
+}
+
+.searchpage table {
+    color:rgb(55, 55, 55);
+}
+
+.searchpage label {
+    width: 140px;
+    display: inline-block;
+    margin: 5px;
+}
+
+.searchpage button {
+    float: right;
+    margin-top: 5px
+}
+
+/* search button */
+#search_button {
+    background-color:rgb(3, 171, 148);
+    color:white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+#search_button:hover {
+    background-color:rgb(9, 99, 32);
+
+}
+
+
+
+
+/* Movie Page */
+
+
+
+
+/* left column alignment */
+.movieleft {
+    float: left;
+    width: 30%;
+    padding: 15px;
+    margin-left: 5%;
+    
+}
+
+/* right column alignment */
+.movieright {
+    float: right;
+    width: 45%;
+    margin-right: 10%;
+    padding: 15px;
+    text-align: left;
+  
+}
+/* double column end */
+.movierow:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/*  add to watched list button */
+#watchlistadd {
+    background-color:rgb(3, 171, 148);
+    color:white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: 15px 20px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+#watchlistadd:hover {
+    background-color:rgb(0, 114, 99);   
+}
+
+/* right column: running time and average rating */
+.movieright table tr td {
+    padding-right: 30px;
+    color: grey;
+}
+
+/* links */
+a.link {
+    text-decoration: none;
+}
+
+/* similar movies */
+ul.simMovies {
+    display: inline-block;
+    text-align: left;
+    width: 80%;
+}
+
+/* reviews section */
+
+/* reviews: */
+/* go to userreview*/
+
+/* add review section */
+label.addreview {
+    width: 140px;
+    display: inline-block; 
+    padding: 5px;
+
+}
+
+textarea {
+    margin-bottom: 5px;
+    padding: 5px;
+
+}
+
+button.addreview {
+    float: right;
+    background-color:rgb(133, 133, 133);
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+}
+
+button.addreview:hover {
+    background-color:rgb(91, 90, 90);
+    color: white;
+
+}
+
+
+
+
+
+/* review page */
+
+.reviewpage {
+    display: inline-block;
+    text-align: left;
+}
+
+
+/* movies (search result) page */
+
+/*entire result */
+.cont {
+    text-align: left;
+    display: inline-block;
+    width: 50%;
+}
+
+/* individual result block */
+.moviecontainer {
+    display: inline-block;
+    text-align: left;
+    cursor: pointer;
+    border-style: outset;
+    border-color:rgb(223, 248, 255);
+    background-color: rgb(250, 254, 255);
+    border-radius:5px;
+    width: 90%;
+    padding: 10px;
+    transition: 0.1s;
+}
+
+/* poster*/
+.leftmovie {
+    float: left;
+    width: 40%;
+
+}
+
+/* movie title*/
+.rightmovie {
+    float: left;
+    width: 60%;
+
+
+}
+.moviecontainer:after {
+    content: "";
+    display: table;
+    clear: both;  
+}
+
+.moviecontainer:hover {
+    background-color: white;
+    color: #544D46;
+}
+
+
+
+/* people (search result list) page */
+
+ul.movies {
+    display: inline-block;
+    text-align: left;
+    list-style-type:none;
+}
+
+
+
+
+/* person page */
+
+
+div#main.person {
+    margin-left: 20%;
+    margin-right: 20%;
+
+}
+
+.personalign {
+    display: inline-block;
+    text-align: left;
+    width: 80%;
+}
